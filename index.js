@@ -146,6 +146,8 @@ function handleArguments(env) {
     );
   }
 
+  require(path.join(__dirname, '/lib/versioned/', range, '/customize/'));
+
   // Load and execute the CLI version
   require(path.join(__dirname, '/lib/versioned/', range, '/'))(opts, env);
 }

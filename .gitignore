@@ -12,3 +12,4 @@ test/out-fixtures/*
 test/output/
 test/watch-*.txt
 gulp.1
+.gulprc

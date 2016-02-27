@@ -1,0 +1,5 @@
+'use strict';
+
+colors.tasks.tree.task.description = 'black';
+colors.tasks.tree.flag.description = 'black';
+colors.tasks.tree.child.name = 'black';
