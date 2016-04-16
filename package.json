@@ -32,6 +32,7 @@
   "dependencies": {
     "archy": "^1.0.0",
     "chalk": "^1.1.0",
+    "customizer": "^1.0.0",
     "fancy-log": "^1.1.0",
     "gulplog": "^1.0.0",
     "interpret": "^1.0.0",
@@ -39,6 +40,7 @@
     "lodash.sortby": "^4.0.1",
     "matchdep": "^1.0.0",
     "mute-stdout": "^1.0.0",
+    "os-homedir": "^1.0.1",
     "pretty-hrtime": "^1.0.0",
     "semver": "^5.1.0",
     "semver-greatest-satisfied-range": "^1.0.0",

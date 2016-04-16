@@ -18,6 +18,8 @@ var verifyDeps = require('./lib/shared/verifyDependencies');
 var cliVersion = require('./package.json').version;
 var getBlacklist = require('./lib/shared/getBlacklist');
 var toConsole = require('./lib/shared/log/toConsole');
+var customize = require('./lib/shared/customize/');
+var oshomedir = require('os-homedir');
 
 // Logging functions
 var logVerify = require('./lib/shared/log/verify');
@@ -146,7 +148,13 @@ function handleArguments(env) {
     );
   }
 
-  require(path.join(__dirname, '/lib/versioned/', range, '/customize/'));
+  var configFiles = {
+    '.gulprc': [
+      path.resolve(oshomedir(), '.gulprc'),
+      path.resolve(process.cwd(), '.gulprc'),
+    ],
+  };
+  customize(range, configFiles['.gulprc'], opts.customize);
 
   // Load and execute the CLI version
   require(path.join(__dirname, '/lib/versioned/', range, '/'))(opts, env);

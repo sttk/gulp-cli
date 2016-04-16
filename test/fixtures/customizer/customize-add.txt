@@ -1,9 +1,0 @@
-'use strict';
-
-aaa.bbb.ddd = 'DDDD';
-
-aaa.eee = {};
-
-aaa.eee.fff = 'FFFF';
-
-aaa.ggg = 'GGGG';
