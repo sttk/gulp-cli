@@ -1,4 +1,4 @@
 {
   "preset": "gulp",
-  "excludeFiles": ["**/*.babel.js"]
+  "excludeFiles": ["**/*.babel.js", "**/gulpfile-harmony.js"]
 }

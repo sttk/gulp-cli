@@ -2,30 +2,32 @@
 
 var fs = require('fs');
 var path = require('path');
-var log = require('gulplog');
 var yargs = require('yargs');
 var Liftoff = require('liftoff');
 var interpret = require('interpret');
 var v8flags = require('v8flags');
 var findRange = require('semver-greatest-satisfied-range');
-var ansi = require('./lib/shared/ansi');
 var exit = require('./lib/shared/exit');
 var tildify = require('./lib/shared/tildify');
 var makeTitle = require('./lib/shared/make-title');
-var cliOptions = require('./lib/shared/cli-options');
 var completion = require('./lib/shared/completion');
 var verifyDeps = require('./lib/shared/verify-dependencies');
 var cliVersion = require('./package.json').version;
 var getBlacklist = require('./lib/shared/get-blacklist');
-var toConsole = require('./lib/shared/log/to-console');
 
 var loadConfigFiles = require('./lib/shared/config/load-files');
 var mergeConfigToCliFlags = require('./lib/shared/config/cli-flags');
 var mergeConfigToEnvFlags = require('./lib/shared/config/env-flags');
+var copyProps = require('copy-props');
 
 // Logging functions
+var log = require('./lib/shared/log/cli-log');
 var logVerify = require('./lib/shared/log/verify');
-var logBlacklistError = require('./lib/shared/log/blacklist-error');
+
+var logTheme = require('./lib/shared/log/log-theme');
+var logMsgs = require('./lib/shared/log/log-msgs');
+var makeUsage = require('./lib/shared/log/make-usage');
+var makeHelp = require('./lib/shared/log/make-help');
 
 // Get supported ranges
 var ranges = fs.readdirSync(__dirname + '/lib/versioned/');
@@ -54,29 +56,22 @@ var cli = new Liftoff({
   },
 });
 
-var usage =
-  '\n' + ansi.bold('Usage:') +
-  ' gulp ' + ansi.blue('[options]') + ' tasks';
-
-var parser = yargs.usage(usage, cliOptions);
+var parser = makeUsage(yargs);
 var opts = parser.argv;
 
 // Set up event listeners for logging temporarily.
-toConsole(log, opts);
+log.setup(logTheme, opts);
 
 cli.on('require', function(name) {
-  log.info('Requiring external module', ansi.magenta(name));
+  log.info(logMsgs.info.require, name);
 });
 
 cli.on('requireFail', function(name) {
-  log.warn(ansi.yellow('Failed to load external module'), ansi.magenta(name));
+  log.warn(logMsgs.warn.requireFail, name);
 });
 
 cli.on('respawn', function(flags, child) {
-  var nodeFlags = ansi.magenta(flags.join(', '));
-  var pid = ansi.magenta(child.pid);
-  log.info('Node flags detected:', nodeFlags);
-  log.info('Respawned to PID:', pid);
+  log.info(logMsgs.info.respawn, flags.join(', '), child.pid);
 });
 
 function run() {
@@ -96,6 +91,8 @@ function handleArguments(env) {
   var cfg = loadConfigFiles(env.configFiles['.gulp'], cfgLoadOrder);
   opts = mergeConfigToCliFlags(opts, cfg);
   env = mergeConfigToEnvFlags(env, cfg);
+  logTheme = copyProps(cfg.log.theme, logTheme);
+  logMsgs = copyProps(cfg.log.messages, logMsgs);
 
   // This translates the --continue flag in gulp
   // To the settle env variable for undertaker
@@ -106,18 +103,19 @@ function handleArguments(env) {
   }
 
   // Set up event listeners for logging again after configuring.
-  toConsole(log, opts);
+  log.setup(logTheme, opts);
 
   if (opts.help) {
-    parser.showHelp(console.log);
+    makeHelp(parser).showHelp(console.log);
     exit(0);
   }
 
   if (opts.version) {
-    log.info('CLI version', cliVersion);
-    if (env.modulePackage && typeof env.modulePackage.version !== 'undefined') {
-      log.info('Local version', env.modulePackage.version);
+    var gulpVer = '';
+    if (env.modulePackage && env.modulePackage.version) {
+      gulpVer = env.modulePackage.version;
     }
+    log.info(logMsgs.info.version, cliVersion, gulpVer);
     exit(0);
   }
 
@@ -126,10 +124,14 @@ function handleArguments(env) {
     if (path.resolve(pkgPath) !== path.normalize(pkgPath)) {
       pkgPath = path.join(env.cwd, pkgPath);
     }
-    log.info('Verifying plugins in ' + pkgPath);
-    return getBlacklist(function(err, blacklist) {
+    log.info(logMsgs.info.verify, pkgPath);
+
+    var blacklistUrl = 'https://gulpjs.com/plugins/blackList.json';
+    return getBlacklist(blacklistUrl, function(err, blacklist) {
+      /* istanbul ignore if */
       if (err) {
-        return logBlacklistError(err);
+        log.error(logMsgs.error.failToGetBlacklist, err.message);
+        return exit(1);
       }
 
       var blacklisted = verifyDeps(require(pkgPath), blacklist);
@@ -139,16 +141,12 @@ function handleArguments(env) {
   }
 
   if (!env.modulePath) {
-    log.error(
-      ansi.red('Local gulp not found in'),
-      ansi.magenta(tildify(env.cwd))
-    );
-    log.error(ansi.red('Try running: npm install gulp'));
+    log.error(logMsgs.error.gulpNotFound, tildify(env.cwd));
     exit(1);
   }
 
   if (!env.configPath) {
-    log.error(ansi.red('No gulpfile found'));
+    log.error(logMsgs.error.gulpfileNotFound);
     exit(1);
   }
 
@@ -156,19 +154,14 @@ function handleArguments(env) {
   // we let them chdir as needed
   if (process.cwd() !== env.cwd) {
     process.chdir(env.cwd);
-    log.info(
-      'Working directory changed to',
-      ansi.magenta(tildify(env.cwd))
-    );
+    log.info(logMsgs.info.cwdChanged, tildify(env.cwd));
   }
 
   // Find the correct CLI version to run
   var range = findRange(env.modulePackage.version, ranges);
 
   if (!range) {
-    return log.error(
-      ansi.red('Unsupported gulp version', env.modulePackage.version)
-    );
+    return log.error(logMsgs.error.badGulpVersion, env.modulePackage.version);
   }
 
   // Load and execute the CLI version

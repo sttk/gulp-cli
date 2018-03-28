@@ -1,2 +1,4 @@
 **/*.babel.js
+**/gulpfile-harmony.js
 coverage
+docs
