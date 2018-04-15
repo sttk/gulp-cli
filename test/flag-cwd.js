@@ -53,7 +53,7 @@ describe('flag: --cwd', function() {
       expect(err).toNotEqual(null);
       stderr = eraseTime(stderr);
       expect(stderr).toEqual(
-        'Local gulp not found in ' + cwd + '\n' +
+        'Local gulp not found in ' + tildify(cwd) + '\n' +
         'Try running: npm install gulp\n' +
       '');
       expect(stdout).toEqual('');

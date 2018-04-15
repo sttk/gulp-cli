@@ -263,6 +263,11 @@ describe('config: log.messages/log.theme', function() {
   });
 
   it('Should configure log message and theme of task not completion', function(done) {
+    if (process.version.slice(0, 5) === 'v0.10') {
+      this.skip();
+      return;
+    }
+
     runner({ verbose: false })
       .basedir(fixturesDir)
       .gulp('--gulpfile', 'gulpfile-error.js', 'notcomplete')
