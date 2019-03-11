@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint no-console: off */
+
 var fs = require('fs');
 var path = require('path');
 var log = require('gulplog');
