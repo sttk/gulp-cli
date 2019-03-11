@@ -87,23 +87,29 @@ cli.on('respawn', function(flags, child) {
   log.info('Respawned to PID:', pid);
 });
 
+
 function run() {
-  cli.launch({
+  cli.prepare({
     cwd: opts.cwd,
     configPath: opts.gulpfile,
     require: opts.require,
     completion: opts.completion,
-  }, handleArguments);
+  }, function(env) {
+
+    var cfgLoadOrder = ['home', 'cwd'];
+    var cfg = loadConfigFiles(env.configFiles['.gulp'], cfgLoadOrder);
+    opts = mergeConfigToCliFlags(opts, cfg);
+    env = mergeConfigToEnvFlags(env, cfg);
+    env.configProps = cfg;
+
+    this.execute(env, handleArguments);
+  });
 }
 
 module.exports = run;
 
 // The actual logic
 function handleArguments(env) {
-  var cfgLoadOrder = ['home', 'cwd'];
-  var cfg = loadConfigFiles(env.configFiles['.gulp'], cfgLoadOrder);
-  opts = mergeConfigToCliFlags(opts, cfg);
-  env = mergeConfigToEnvFlags(env, cfg);
 
   // This translates the --continue flag in gulp
   // To the settle env variable for undertaker
@@ -180,5 +186,6 @@ function handleArguments(env) {
   }
 
   // Load and execute the CLI version
-  require(path.join(__dirname, '/lib/versioned/', range, '/'))(opts, env, cfg);
+  var versionedDir = path.join(__dirname, '/lib/versioned/', range, '/');
+  require(versionedDir)(opts, env, env.configProps);
 }
