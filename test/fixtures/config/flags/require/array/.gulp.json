@@ -1,0 +1,8 @@
+{
+  "flags": {
+    "require": [
+      "../../../../test-error-module.js",
+      "../../../../test-module.js"
+    ]
+  }
+}

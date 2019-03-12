@@ -102,7 +102,7 @@ function run() {
     env = mergeConfigToEnvFlags(env, cfg);
     env.configProps = cfg;
 
-    this.execute(env, handleArguments);
+    this.execute(env, env.nodeFlags, handleArguments);
   });
 }
 
