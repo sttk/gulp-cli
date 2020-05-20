@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport">
+<title>Configurable Log Theme</title>
+<script src="js/copy-props.min.js"></script>
+<script src="js/theming-log.min.js"></script>
+<script>var module = { exports: {} };</script>
+<script src="../../lib/shared/log/theme.js"></script>
+<script>var theme = module.exports;</script>
+<script src="js/theme-dic.js"></script>
+<script src="js/page.js"></script>
+<script>window.addEventListener('DOMContentLoaded', writeTheme);</script>
+<link href="css/page.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+<h1>Configurable Log Theme</h1>
+<p>Gulp's log outputs have theme and the theme can be configured with <code>.gulp.*</code> file.  Since this function is realized by using <a href="https://github.com/sttk/theming-log">theming-log</a>, the format of log message templates follows the specification of it. An example is as below:</p>
+<div class="configfile-example jscode"><code><pre>
+// .gulp.js
+module.exports = {
+  log: {
+    theme: {
+      ...,
+      TASK: '{cyan: {1}}',
+      TASKS: {
+        NAME: '{TASK: {1}}',
+        ...,
+      },
+      ...,
+    },
+  },
+};
+</pre></code></div>
+</header>
+<main>
+</main>
+</body>
+</html>
