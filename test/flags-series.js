@@ -20,6 +20,7 @@ describe('flag: --series', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(sliceLines(stdout, 2)).toEqual(
@@ -41,6 +42,7 @@ describe('flag: --series', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).not.toMatch('Starting \'anon\'');
