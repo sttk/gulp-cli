@@ -20,6 +20,8 @@ describe('execution error', function() {
     exec(gulp('a'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(err.code).toEqual(1);
       expect(eraseTime(stdout)).toMatch('Using gulpfile ');
@@ -35,6 +37,8 @@ describe('execution error', function() {
     exec(gulp('test0'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(err.code).toEqual(1);
       expect(eraseTime(stdout)).toMatch('Using gulpfile ');
@@ -50,6 +54,7 @@ describe('execution error', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(err.code).toEqual(1);
       expect(eraseTime(stdout)).toEqual('');
@@ -63,6 +68,8 @@ describe('execution error', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(err.code).toEqual(1);
       expect(sliceLines(stderr, 0, 1)).toMatch('Local gulp not found in ');
@@ -83,6 +90,8 @@ describe('execution error', function() {
 
     function cb(err, stdout, stderr) {
       try {
+        console.log(stdout);
+        console.log(stderr);
         expect(err).not.toBeNull();
         expect(err.code).toEqual(1);
         expect(sliceLines(stderr, 0, 1)).toMatch('Local gulp not found in ');
@@ -106,6 +115,8 @@ describe('execution error', function() {
 
     function cb(err, stdout, stderr) {
       try {
+        console.log(stdout);
+        console.log(stderr);
         expect(err).not.toBeNull();
         expect(err.code).toEqual(1);
         expect(sliceLines(stderr, 0, 1)).toMatch('Local modules not found in ');
@@ -132,6 +143,8 @@ describe('execution error', function() {
 
     function cb(err, stdout, stderr) {
       try {
+        console.log(stdout);
+        console.log(stderr);
         expect(err).not.toBeNull();
         expect(err.code).toEqual(1);
         expect(sliceLines(stderr, 0, 1)).toMatch('Local modules not found in ');
@@ -153,6 +166,8 @@ describe('execution error', function() {
     ), { cwd: dir }, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(err.code).toEqual(1);
       expect(sliceLines(stdout)).toEqual(

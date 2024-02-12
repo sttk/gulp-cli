@@ -25,6 +25,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--help'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
@@ -40,6 +41,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--help'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
@@ -57,6 +59,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--tasks'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
@@ -72,6 +75,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--tasks'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
@@ -97,6 +101,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--tasks'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
@@ -122,6 +127,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--tasks'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
@@ -147,6 +153,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--tasks'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
@@ -170,6 +177,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--tasks-json'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
@@ -190,6 +198,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--preload ./preload'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseLapse(eraseTime(stdout))).toEqual(expected);
@@ -210,6 +219,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--preload ./preload'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseLapse(eraseTime(stdout))).toEqual(expected);
@@ -231,6 +241,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('-f gulpfile.babel.js'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseLapse(eraseTime(stdout))).toEqual(expected);
@@ -250,6 +261,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--lazy'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseLapse(eraseTime(stdout))).toEqual(expected);
@@ -265,6 +277,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--version'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toMatch(expected);
@@ -284,6 +297,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--cwd ' + cwd), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseLapse(eraseTime(stdout))).toEqual(expected);
@@ -302,6 +316,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseLapse(eraseTime(stdout))).toEqual(expected);
@@ -320,6 +335,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseLapse(eraseTime(stdout))).toEqual(expected);
@@ -338,6 +354,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseTime(stdout)).toEqual(expected);
@@ -358,6 +375,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--preload null-module'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       expect(eraseLapse(eraseTime(stdout))).toEqual(expected);
@@ -373,6 +391,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('-f gulpfile.coffee'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(stderr).not.toEqual('');
       expect(eraseTime(stdout)).toEqual(expected);
@@ -391,6 +410,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(stderr).toEqual('');
       expect(eraseTime(stdout)).toEqual(expected);
@@ -406,6 +426,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('-f'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(stdout).toEqual('');
       expect(stderr).toEqual(expected);
@@ -428,6 +449,7 @@ describe('config: theme.* & msgs.*', function() {
 
     function cb(err, stdout, stderr) {
       try {
+        console.log(stderr);
         expect(err).not.toBeNull();
         expect(stdout).toEqual('');
         expect(stderr).toEqual(expected);
@@ -453,6 +475,7 @@ describe('config: theme.* & msgs.*', function() {
 
     function cb(err, stdout, stderr) {
       try {
+        console.log(stderr);
         expect(err).not.toBeNull();
         expect(stdout).toEqual('');
         expect(stderr).toEqual(expected);
@@ -472,6 +495,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(stdout).toEqual('');
       expect(eraseTime(stderr)).toEqual(expected);
@@ -487,6 +511,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(stdout).toEqual('');
       expect(eraseTime(stderr)).toEqual(expected);
@@ -505,6 +530,8 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
+      console.log(stdout);
       expect(err).not.toBeNull();
       expect(eraseTime(stderr)).toEqual(expectedStderr);
       expect(eraseTime(stdout)).toEqual(expectedStdout);
@@ -522,6 +549,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('defaults'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(eraseTime(stderr)).toMatch(expectedStderr);
       expect(eraseTime(stdout)).toEqual(expectedStdout);
@@ -537,6 +565,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp(), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(stderr).toEqual(expected);
       expect(stdout).toEqual('');
@@ -552,6 +581,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--completion'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(stderr).toMatch(expected);
       expect(stdout).toEqual('');
@@ -567,6 +597,7 @@ describe('config: theme.* & msgs.*', function() {
     exec(gulp('--completion=xxx'), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stderr);
       expect(err).not.toBeNull();
       expect(stderr).toEqual('');
       expect(stdout).toEqual(expected);
