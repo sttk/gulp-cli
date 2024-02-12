@@ -22,6 +22,7 @@ describe('flag: --tasks', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'flags-tasks.txt');
@@ -41,6 +42,7 @@ describe('flag: --tasks', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'with-desc-and-flags.txt');
@@ -60,6 +62,7 @@ describe('flag: --tasks', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'by-unwrap-and-not-by-unwrap.txt');
@@ -77,6 +80,7 @@ describe('flag: --tasks', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'flags-tasks-unsorted.txt');
@@ -95,6 +99,7 @@ describe('flag: --tasks', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'flags-tasks-sorted.txt');
@@ -113,6 +118,7 @@ describe('flag: --tasks', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'flags-tasks-depth4.txt');
@@ -131,6 +137,7 @@ describe('flag: --tasks', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'flags-tasks-depth4.txt');
@@ -149,6 +156,7 @@ describe('flag: --tasks', function() {
     ), opts, cb);
 
     function cb(err, stdout, stderr) {
+      console.log(stdout);
       expect(err).toBeNull();
       expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'flags-tasks-compact.txt');
